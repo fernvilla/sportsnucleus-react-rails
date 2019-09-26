@@ -1,0 +1,13 @@
+{
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "prettier.printWidth": 100,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "[ruby]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveTimeout": 15000
+  },
+  "ruby.format": "rubocop"
+}
