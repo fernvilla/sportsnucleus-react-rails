@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_044958) do
+ActiveRecord::Schema.define(version: 2019_09_27_053000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,22 @@ ActiveRecord::Schema.define(version: 2019_09_27_044958) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "source_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.string "name"
+    t.string "website_url"
+    t.string "canonical"
+    t.bigint "source_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["source_type_id"], name: "index_sources_on_source_type_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -61,5 +77,6 @@ ActiveRecord::Schema.define(version: 2019_09_27_044958) do
     t.index ["league_id"], name: "index_teams_on_league_id"
   end
 
+  add_foreign_key "sources", "source_types"
   add_foreign_key "teams", "leagues"
 end

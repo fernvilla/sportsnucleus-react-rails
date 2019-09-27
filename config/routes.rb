@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :teams
     resources :leagues
+    resources :sources
+    resources :source_types
   end
 end
