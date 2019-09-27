@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_053000) do
+ActiveRecord::Schema.define(version: 2019_09_27_054904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,22 @@ ActiveRecord::Schema.define(version: 2019_09_27_053000) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.text "title"
+    t.string "author"
+    t.datetime "published_date"
+    t.string "image"
+    t.string "url"
+    t.integer "clicks"
+    t.text "summary"
+    t.bigint "source_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["source_id"], name: "index_articles_on_source_id"
+    t.index ["team_id"], name: "index_articles_on_team_id"
+  end
+
   create_table "leagues", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -48,6 +64,16 @@ ActiveRecord::Schema.define(version: 2019_09_27_053000) do
     t.string "website_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rss_feeds", force: :cascade do |t|
+    t.string "feed_url"
+    t.integer "last_status_code"
+    t.boolean "is_active"
+    t.bigint "source_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["source_id"], name: "index_rss_feeds_on_source_id"
   end
 
   create_table "source_types", force: :cascade do |t|
@@ -77,6 +103,9 @@ ActiveRecord::Schema.define(version: 2019_09_27_053000) do
     t.index ["league_id"], name: "index_teams_on_league_id"
   end
 
+  add_foreign_key "articles", "sources"
+  add_foreign_key "articles", "teams"
+  add_foreign_key "rss_feeds", "sources"
   add_foreign_key "sources", "source_types"
   add_foreign_key "teams", "leagues"
 end

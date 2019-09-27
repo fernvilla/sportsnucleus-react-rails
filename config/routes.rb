@@ -3,12 +3,14 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   scope '/api' do
     resources :teams
     resources :leagues
     resources :sources
     resources :source_types
+    resources :rss_feeds
+    resources :articles
   end
 end
