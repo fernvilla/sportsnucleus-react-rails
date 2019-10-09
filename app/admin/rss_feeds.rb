@@ -6,13 +6,13 @@ ActiveAdmin.register RssFeed do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :feed_url, :last_status_code, :is_active, :source_id
+  permit_params :feed_url, :last_status_code, :is_active, :source_id, :team_id
   #
   # or
   #
-  permit_params do
-    permitted = %i[feed_url last_status_code is_active source_id]
-    permitted << :other if params[:action] == 'create' && current_user.admin?
-    permitted
-  end
+  # permit_params do
+  #   permitted = %i[feed_url last_status_code is_active source_id]
+  #   permitted << :other if params[:action] == 'create' && current_user.admin?
+  #   permitted
+  # end
 end

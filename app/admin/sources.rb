@@ -5,14 +5,14 @@ ActiveAdmin.register Source do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :website_url, :canonical, :source_type_id
+  permit_params :name, :website_url, :canonical, :source_type_id
   #
   # or
   #
-  permit_params do
-    permitted = [:name, :website_url, :canonical, :source_type_id]
-    permitted << :other if params[:action] == 'create' && current_user.admin?
-    permitted
-  end
+  # permit_params do
+  #   permitted = [:name, :website_url, :canonical, :source_type_id]
+  #   permitted << :other if params[:action] == 'create' && current_user.admin?
+  #   permitted
+  # end
   
 end

@@ -6,13 +6,13 @@ ActiveAdmin.register League do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :abbreviation, :canonical, :website_url
+  permit_params :name, :abbreviation, :canonical, :website_url
   #
   # or
   #
-  permit_params do
-    permitted = [:name, :abbreviation, :canonical, :website_url]
-    permitted << :other if params[:action] == 'create' && current_user.admin?
-    permitted
-  end
+  # permit_params do
+  #   permitted = [:name, :abbreviation, :canonical, :website_url]
+  #   permitted << :other if params[:action] == 'create' && current_user.admin?
+  #   permitted
+  # end
 end
