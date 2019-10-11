@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     resources :source_types
     resources :rss_feeds
     resources :articles
+
+    get 'articles/get_by_team/:canonical' => 'articles#get_by_team'
   end
 end

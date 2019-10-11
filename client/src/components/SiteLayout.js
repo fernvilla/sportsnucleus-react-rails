@@ -33,7 +33,7 @@ let SiteLayout = props => {
               }`}
               alt="Logo"
               style={{
-                height: "25px",
+                height: "24px",
                 margin: "16px 0"
               }}
             />
@@ -44,7 +44,7 @@ let SiteLayout = props => {
           theme="dark"
           mode="inline"
           style={{ height: "100%" }}
-          selectedKeys={[location.pathname]}
+          selectedKeys={[`${location.pathname}`]}
         >
           {leagues.map((league, i) => {
             return (
@@ -52,8 +52,8 @@ let SiteLayout = props => {
                 {league.teams &&
                   league.teams.map(team => {
                     return (
-                      <Menu.Item key={`/${team.canonical}`}>
-                        <Link to={team.canonical}>{team.name}</Link>
+                      <Menu.Item key={`/teams/${team.canonical}`}>
+                        <Link to={`/teams/${team.canonical}`}>{team.name}</Link>
                       </Menu.Item>
                     );
                   })}
@@ -63,8 +63,8 @@ let SiteLayout = props => {
         </Menu>
       </Sider>
 
-      <Layout style={{ marginLeft: 200 }}>
-        <Content style={{ margin: "16px", overflow: "initial" }}>{props.children}</Content>
+      <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
+        <Content style={{ margin: "2.5em", overflow: "initial" }}>{props.children}</Content>
         <Footer style={{ textAlign: "center" }}>Sports Nucleus ©{new Date().getFullYear()}</Footer>
       </Layout>
     </Layout>

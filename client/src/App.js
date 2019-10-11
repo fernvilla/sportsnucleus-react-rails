@@ -5,21 +5,27 @@ import { Spin } from "antd";
 import { fetchLeagues } from "./actions";
 import SiteLayout from "./components/SiteLayout";
 import Home from "./pages/Home";
+import Team from "./pages/Team";
 
 const App = props => {
-  useEffect(() => {
-    const fetchInitialData = () => props.fetchLeagues();
+  const {
+    match: { path },
+    fetchingLeagues,
+    fetchLeagues
+  } = props;
 
-    fetchInitialData();
-  }, []);
+  useEffect(() => {
+    fetchLeagues();
+  }, [fetchLeagues]);
 
   return (
     <SiteLayout>
-      {props.fetchingLeagues ? (
+      {fetchingLeagues ? (
         <Spin size="large" />
       ) : (
         <Fragment>
-          <Route exact component={Home} />
+          <Route path={path} exact component={Home} />
+          <Route path="/teams/:team" component={Team} />
         </Fragment>
       )}
     </SiteLayout>
@@ -27,7 +33,6 @@ const App = props => {
 };
 
 const mapStateToProps = state => ({
-  fetchLeaguesError: state.fetchLeaguesError,
   fetchingLeagues: state.fetchingLeagues
 });
 
