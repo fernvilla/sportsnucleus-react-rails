@@ -6,7 +6,7 @@ class LeaguesController < ApplicationController
   def index
     @leagues = League.all
 
-    render json: @leagues
+    render json: @leagues.sort_by { |league| league[:abbreviation] }, include: %i[teams]
   end
 
   def show

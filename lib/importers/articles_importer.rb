@@ -25,23 +25,23 @@ class ArticlesImporter
         next unless (Date.today - entry.published.to_date).to_i <= 2
 
         Article.where(url: entry.url).first_or_create(
-          title: CGI.unescapeHTML(entry.title),
+          title: !entry.title.nil? ? CGI.unescapeHTML(entry.title) : nil,
           author: entry.author,
-          summary: CGI.unescapeHTML(entry.summary),
+          summary: !entry.summary.nil? ? CGI.unescapeHTML(entry.summary) : nil,
           url: entry.url,
           published_date: entry.published,
           source_id: feed.source_id,
           team_id: feed.team_id
         )
 
-        # if defined? entry.image
-        #   url = Article.where(url: entry.url).first
-        #   url.update(image: entry.image)
-        # end
+        if defined? entry.image
+          url = Article.where(url: entry.url).first
+          url.update(image: entry.image)
+        end
       end
     rescue StandardError => e
       puts e
-      puts feed.url
+      puts feed.feed_url
     end
   end
 end
