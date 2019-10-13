@@ -15,4 +15,8 @@ Rails.application.routes.draw do
 
     get 'articles/get_by_team/:canonical' => 'articles#get_by_team'
   end
+
+  get '*path', to: 'application#fallback_index_html', constraints: lambda { |request|
+    !request.xhr? && request.format.html?
+  }
 end
