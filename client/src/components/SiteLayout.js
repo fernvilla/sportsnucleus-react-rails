@@ -18,12 +18,6 @@ let SiteLayout = props => {
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0
-        }}
       >
         <div style={{ textAlign: "center" }}>
           <Link to="/">
@@ -63,7 +57,7 @@ let SiteLayout = props => {
         </Menu>
       </Sider>
 
-      <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
+      <Layout>
         <Content style={{ margin: "2.5em", overflow: "initial" }}>{props.children}</Content>
         <Footer style={{ textAlign: "center" }}>Sports Nucleus ©{new Date().getFullYear()}</Footer>
       </Layout>
