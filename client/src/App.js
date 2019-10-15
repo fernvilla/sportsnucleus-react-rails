@@ -25,7 +25,7 @@ const App = props => {
       ) : (
         <Fragment>
           <Route path={path} exact component={Home} />
-          <Route path="/teams/:team" component={Team} />
+          <Route path="/teams/:canonical" component={Team} />
         </Fragment>
       )}
     </SiteLayout>

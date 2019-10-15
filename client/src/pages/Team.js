@@ -13,12 +13,12 @@ const Team = props => {
 
   useEffect(() => {
     const fetchData = () => {
-      fetchTeam(params.team);
-      fetchMostViewed(params.team);
+      fetchTeam(params.canonical);
+      fetchMostViewed(params.canonical);
     };
 
     fetchData();
-  }, [params.team]);
+  }, [params.canonical]);
 
   const fetchTeam = async team => {
     const { data } = await axios.get(`/api/teams/get_by_canonical/${team}`);

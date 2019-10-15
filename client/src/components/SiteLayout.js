@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-
+import _isNil from "lodash/isNil";
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 let SiteLayout = props => {
   const { leagues, location } = props;
   const [collapsed, setCollapsed] = useState(false);
+  const selectedParentLeague =
+    leagues.find(l => l.teams.find(t => `/teams/${t.canonical}` === location.pathname)) || {};
 
   const onCollapse = collapsed => setCollapsed(collapsed);
 
+  if (!leagues.length) return null;
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-      >
+      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div style={{ textAlign: "center" }}>
           <Link to="/">
             <img
@@ -39,6 +39,7 @@ let SiteLayout = props => {
           mode="inline"
           style={{ height: "100%" }}
           selectedKeys={[`${location.pathname}`]}
+          defaultOpenKeys={[selectedParentLeague.abbreviation]}
         >
           {leagues.map((league, i) => {
             return (
