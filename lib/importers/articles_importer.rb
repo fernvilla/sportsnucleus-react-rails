@@ -31,7 +31,8 @@ class ArticlesImporter
           url: entry.url,
           published_date: entry.published,
           source_id: feed.source_id,
-          team_id: feed.team_id
+          team_id: feed.team_id,
+          clicks: 0
         )
 
         if defined? entry.image

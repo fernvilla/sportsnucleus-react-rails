@@ -1,28 +1,48 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ArticlesContainer from "../components/ArticlesContainer";
+import { Row, Col } from "antd";
+import MostViewedArticles from "../components/MostViewedArticles";
 
 const Team = props => {
   const {
-    match: {
-      params: { team }
-    }
+    match: { params }
   } = props;
-  const [articles, setArticles] = useState([]);
+  const [team, setTeam] = useState({});
+  const [mostViewedArticles, setMostViewedArticles] = useState([]);
 
   useEffect(() => {
-    fetchTeam(team);
-  }, [team]);
+    const fetchData = () => {
+      fetchTeam(params.team);
+      fetchMostViewed(params.team);
+    };
+
+    fetchData();
+  }, [params.team]);
 
   const fetchTeam = async team => {
-    const { data } = await axios.get(`/api/articles/get_by_team/${team}`);
+    const { data } = await axios.get(`/api/teams/get_by_canonical/${team}`);
 
-    setArticles(data);
+    setTeam(data);
+  };
+
+  const fetchMostViewed = async team => {
+    const { data } = await axios.get(`/api/articles/get_most_viewed_by_team/${team}`);
+
+    setMostViewedArticles(data);
   };
 
   return (
     <div>
-      <ArticlesContainer articles={articles} />
+      <Row gutter={24}>
+        <Col xs={24} lg={14} xl={17}>
+          <ArticlesContainer articles={team.articles} />
+        </Col>
+
+        <Col xs={24} lg={10} xl={7}>
+          <MostViewedArticles articles={mostViewedArticles} />
+        </Col>
+      </Row>
     </div>
   );
 };

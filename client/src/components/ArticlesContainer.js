@@ -1,19 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, Avatar, Icon, Layout } from "antd";
+import { List, Layout } from "antd";
 import { formatDistanceToNow } from "date-fns";
+import axios from "axios";
 
-const { Content, Footer, Sider } = Layout;
-
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
+const { Content } = Layout;
 
 const ArticlesContainer = props => {
   const { articles } = props;
+
+  const updateCount = id => {
+    axios.patch(`/api/articles/update_count/${id}`);
+  };
 
   return (
     <Content
@@ -21,7 +19,7 @@ const ArticlesContainer = props => {
         background: "#fff",
         padding: "1em 2em 2em",
         margin: 0,
-        border: "1px solid #ccc"
+        boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)"
       }}
     >
       <List
@@ -36,7 +34,12 @@ const ArticlesContainer = props => {
         dataSource={articles}
         footer={null}
         renderItem={article => (
-          <List.Item key={article.title} actions={null} extra={null}>
+          <List.Item
+            key={article.title}
+            actions={null}
+            extra={null}
+            onClick={() => updateCount(article.id)}
+          >
             <List.Item.Meta
               avatar={null}
               title={

@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :articles
 
     get 'articles/get_by_team/:canonical' => 'articles#get_by_team'
+    get 'articles/get_most_viewed_by_team/:canonical' => 'articles#get_most_viewed_by_team'
+    patch 'articles/update_count/:id' => 'articles#update_count'
+
+    get 'teams/get_by_canonical/:canonical' => 'teams#get_by_canonical'
   end
 
   get '*path', to: 'application#fallback_index_html', constraints: lambda { |request|

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show update destroy]
+  before_action :set_article, only: %i[show update destroy update_count]
 
   def index
     @articles = Article.all
@@ -39,6 +39,17 @@ class ArticlesController < ApplicationController
     @articles = Article.joins(:team).where(teams: { canonical: params[:canonical] })
 
     render json: @articles, include: %i[team source]
+  end
+
+  def get_most_viewed_by_team
+    @articles = Article.joins(:team).where(teams: { canonical: params[:canonical] }).where('clicks > ?', 0)
+
+    render json: @articles.order(clicks: :desc)
+  end
+
+  def update_count
+    puts @article.title
+    @article.increment!(:clicks)
   end
 
   private

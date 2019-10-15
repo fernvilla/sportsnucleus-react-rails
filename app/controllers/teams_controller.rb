@@ -35,6 +35,12 @@ class TeamsController < ApplicationController
     @team.destroy
   end
 
+  def get_by_canonical
+    @team = Team.includes(:articles).order('articles.published_date desc').find_by(canonical: params[:canonical])
+
+    render json: @team, include: { articles: { include: %i[source] } }
+  end
+
   private
 
   def set_team
