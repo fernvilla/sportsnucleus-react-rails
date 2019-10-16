@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { formatDistanceToNow } from "date-fns";
 import { List, Layout, Typography } from "antd";
 
-const { Title } = Typography;
+const { Paragraph } = Typography;
 const { Content } = Layout;
 
 const MostViewedArticles = props => {
@@ -16,11 +16,12 @@ const MostViewedArticles = props => {
         boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)"
       }}
     >
-      <Title level={4}>Most Viewed Articles</Title>
+      <Paragraph strong>Most Viewed Articles</Paragraph>
 
       <List
         itemLayout="horizontal"
         dataSource={props.articles}
+        size="small"
         renderItem={article => (
           <List.Item>
             <List.Item.Meta
@@ -32,7 +33,7 @@ const MostViewedArticles = props => {
                     rel="noopener noreferre"
                     style={{ color: "#1b6dc1" }}
                   >
-                    {article.title}
+                    {article.title}{" "}
                   </a>
 
                   <em>

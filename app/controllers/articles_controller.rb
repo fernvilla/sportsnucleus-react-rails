@@ -47,6 +47,12 @@ class ArticlesController < ApplicationController
     render json: @articles.order(clicks: :desc)
   end
 
+  def last_day
+    @articles = Article.where('published_date >= ?', 24.hours.ago)
+
+    render json: @articles, include: %i[team source]
+  end
+
   def update_count
     puts @article.title
     @article.increment!(:clicks)

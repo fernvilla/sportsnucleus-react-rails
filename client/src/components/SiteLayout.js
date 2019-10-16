@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Menu } from "antd";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
@@ -9,12 +9,21 @@ const { SubMenu } = Menu;
 let SiteLayout = props => {
   const { leagues, location } = props;
   const [collapsed, setCollapsed] = useState(false);
-  const selectedParentLeague =
-    leagues.find(l => l.teams.find(t => `/teams/${t.canonical}` === location.pathname)) || {};
+  const [openKeys, setOpenKeys] = useState([]);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setOpenKeys([]);
+    } else {
+      const selectedParentLeague = leagues.find(l =>
+        l.teams.find(t => `/teams/${t.canonical}` === location.pathname)
+      );
+
+      if (selectedParentLeague) setOpenKeys([selectedParentLeague.abbreviation]);
+    }
+  }, [leagues, location.pathname]);
 
   const onCollapse = collapsed => setCollapsed(collapsed);
-
-  if (!leagues.length) return null;
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -37,9 +46,9 @@ let SiteLayout = props => {
         <Menu
           theme="dark"
           mode="inline"
-          style={{ height: "100%" }}
           selectedKeys={[`${location.pathname}`]}
-          defaultOpenKeys={[selectedParentLeague.abbreviation]}
+          openKeys={openKeys}
+          onOpenChange={props => setOpenKeys(props)}
         >
           {leagues.map((league, i) => {
             return (
