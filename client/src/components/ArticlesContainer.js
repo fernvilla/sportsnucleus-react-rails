@@ -59,7 +59,12 @@ const ArticlesContainer = props => {
                 </em>
               }
             />
-            {article.summary && <span>Summary: {article.summary}</span>}
+            {article.summary && (
+              <span>
+                Summary:
+                <span dangerouslySetInnerHTML={{ __html: article.summary }}></span>
+              </span>
+            )}
           </List.Item>
         )}
       />
