@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, Layout } from "antd";
+import { List, Layout, Avatar } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
 
@@ -26,9 +26,6 @@ const ArticlesContainer = props => {
         itemLayout="vertical"
         size="large"
         pagination={{
-          onChange: page => {
-            // console.log(page);
-          },
           pageSize: 10
         }}
         dataSource={articles}
@@ -41,7 +38,7 @@ const ArticlesContainer = props => {
             onClick={() => updateCount(article.id)}
           >
             <List.Item.Meta
-              avatar={null}
+              avatar={<Avatar icon="read" style={{ background: "#1b6dc1" }} />}
               title={
                 <a
                   href={article.url}
