@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         get 'last_day'
         get 'get_by_team/:canonical' => 'articles#get_by_team'
         get 'get_most_viewed_by_team/:canonical' => 'articles#get_most_viewed_by_team'
+        get 'get_most_viewed_last_day/' => 'articles#get_most_viewed_last_day'
         patch 'update_count/:id' => 'articles#update_count'
       end
     end

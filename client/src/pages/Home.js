@@ -11,7 +11,7 @@ const Home = props => {
   useEffect(() => {
     const fetchData = () => {
       fetchArticles();
-      // fetchMostViewed();
+      fetchMostViewed();
     };
 
     fetchData();
@@ -23,11 +23,11 @@ const Home = props => {
     setArticles(data);
   };
 
-  // const fetchMostViewed = async () => {
-  //   const { data } = await axios.get(`/api/articles/get_most_viewed_by_team/${team}`);
+  const fetchMostViewed = async () => {
+    const { data } = await axios.get(`/api/articles/get_most_viewed_last_day`);
 
-  //   setMostViewedArticles(data);
-  // };
+    setMostViewedArticles(data);
+  };
 
   return (
     <div>

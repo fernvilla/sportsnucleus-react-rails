@@ -48,9 +48,15 @@ class ArticlesController < ApplicationController
   end
 
   def last_day
-    @articles = Article.where('published_date >= ?', 24.hours.ago)
+    @articles = Article.where('published_date > ?', 24.hours.ago)
 
-    render json: @articles, include: %i[team source]
+    render json: @articles.order(published_date: :desc), include: %i[team source]
+  end
+
+  def get_most_viewed_last_day
+    @articles = Article.where('published_date > ?', 24.hours.ago).where('clicks > ?', 0)
+
+    render json: @articles.order(clicks: :desc)
   end
 
   def update_count
