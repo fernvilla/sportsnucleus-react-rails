@@ -2,7 +2,7 @@
 
 require 'feedjira'
 require 'httparty'
-require 'cgi'
+require 'sanitize'
 
 class ArticlesImporter
   def self.import
@@ -25,9 +25,9 @@ class ArticlesImporter
         # next unless (Date.today - entry.published.to_date).to_i <= 2
 
         Article.where(url: entry.url).first_or_create(
-          title: !entry.title.nil? ? CGI.unescapeHTML(entry.title) : nil,
+          title: !entry.title.nil? ? Sanitize.fragment(entry.title) : nil,
           author: entry.author,
-          summary: !entry.summary.nil? ? CGI.unescapeHTML(entry.summary) : nil,
+          summary: !entry.summary.nil? ? Sanitize.fragment(entry.summary, tags: []) : nil,
           url: entry.url,
           published_date: entry.published,
           source_id: feed.source_id,
