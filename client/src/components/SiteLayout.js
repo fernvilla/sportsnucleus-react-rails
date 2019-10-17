@@ -57,7 +57,7 @@ let SiteLayout = props => {
                   league.teams.map(team => {
                     return (
                       <Menu.Item key={`/teams/${team.canonical}`}>
-                        <Link to={`/teams/${team.canonical}`}>{team.name}</Link>
+                        <Link to={`/teams/${team.canonical}`}>{team.abbreviation}</Link>
                       </Menu.Item>
                     );
                   })}
