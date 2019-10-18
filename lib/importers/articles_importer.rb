@@ -22,7 +22,7 @@ class ArticlesImporter
       next unless defined? parsed_feed.entries
 
       parsed_feed.entries.each do |entry|
-        # next unless (Date.today - entry.published.to_date).to_i <= 2
+        next unless (Date.today - entry.published.to_date).to_i <= 2
 
         Article.where(url: entry.url).first_or_create(
           title: !entry.title.nil? ? Sanitize.fragment(entry.title) : nil,
