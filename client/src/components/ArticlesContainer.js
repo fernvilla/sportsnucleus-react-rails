@@ -26,7 +26,7 @@ const ArticlesContainer = props => {
         itemLayout="vertical"
         size="large"
         pagination={{
-          pageSize: 10
+          pageSize: 20
         }}
         dataSource={articles}
         footer={null}
