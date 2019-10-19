@@ -46,7 +46,7 @@ const ArticlesContainer = props => {
       <Content
         style={{
           background: "#fff",
-          padding: "1em 2em 2em",
+          padding: "1em 2em",
           margin: 0,
           boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)"
         }}
