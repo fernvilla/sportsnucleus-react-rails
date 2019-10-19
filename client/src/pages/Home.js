@@ -6,6 +6,7 @@ import MostViewedArticles from "../components/MostViewedArticles";
 
 const Home = props => {
   const [articles, setArticles] = useState([]);
+  const [fetchingArticles, setFetchingArticles] = useState(false);
   const [mostViewedArticles, setMostViewedArticles] = useState([]);
 
   useEffect(() => {
@@ -18,9 +19,11 @@ const Home = props => {
   }, []);
 
   const fetchArticles = async () => {
+    setFetchingArticles(true);
     const { data } = await axios.get(`/api/articles/last_day`);
 
     setArticles(data);
+    setFetchingArticles(false);
   };
 
   const fetchMostViewed = async () => {
@@ -33,7 +36,7 @@ const Home = props => {
     <div>
       <Row gutter={24}>
         <Col xs={24} lg={14} xl={17}>
-          <ArticlesContainer articles={articles} />
+          <ArticlesContainer articles={articles} loading={fetchingArticles} />
         </Col>
 
         <Col xs={24} lg={10} xl={7}>

@@ -7,7 +7,7 @@ import axios from "axios";
 const { Content } = Layout;
 
 const ArticlesContainer = props => {
-  const { articles } = props;
+  const { articles, loading } = props;
 
   const updateCount = id => {
     axios.patch(`/api/articles/update_count/${id}`);
@@ -28,6 +28,7 @@ const ArticlesContainer = props => {
         pagination={{
           pageSize: 20
         }}
+        loading={loading}
         dataSource={articles}
         footer={null}
         renderItem={article => (
@@ -65,11 +66,13 @@ const ArticlesContainer = props => {
 };
 
 ArticlesContainer.propTypes = {
-  articles: PropTypes.array
+  articles: PropTypes.array,
+  loading: PropTypes.bool
 };
 
 ArticlesContainer.defaultProps = {
-  articles: []
+  articles: [],
+  loading: false
 };
 
 export default ArticlesContainer;

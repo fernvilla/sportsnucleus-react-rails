@@ -9,6 +9,7 @@ const Team = props => {
     match: { params }
   } = props;
   const [team, setTeam] = useState({});
+  const [fetchingTeam, setFetchingTeam] = useState(false);
   const [mostViewedArticles, setMostViewedArticles] = useState([]);
 
   useEffect(() => {
@@ -21,9 +22,11 @@ const Team = props => {
   }, [params.canonical]);
 
   const fetchTeam = async team => {
+    setFetchingTeam(true);
     const { data } = await axios.get(`/api/teams/get_by_canonical/${team}`);
 
     setTeam(data);
+    setFetchingTeam(false);
   };
 
   const fetchMostViewed = async team => {
@@ -36,7 +39,7 @@ const Team = props => {
     <div>
       <Row gutter={24}>
         <Col xs={24} lg={14} xl={17}>
-          <ArticlesContainer articles={team.articles} />
+          <ArticlesContainer articles={team.articles} loading={fetchingTeam} />
         </Col>
 
         <Col xs={24} lg={10} xl={7}>

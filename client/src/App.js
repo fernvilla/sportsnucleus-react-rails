@@ -10,7 +10,6 @@ import Team from "./pages/Team";
 const App = props => {
   const {
     match: { path },
-    fetchingLeagues,
     fetchLeagues
   } = props;
 
@@ -20,14 +19,10 @@ const App = props => {
 
   return (
     <SiteLayout>
-      {fetchingLeagues ? (
-        <Spin size="large" />
-      ) : (
-        <Fragment>
-          <Route path={path} exact component={Home} />
-          <Route path="/teams/:canonical" component={Team} />
-        </Fragment>
-      )}
+      <Fragment>
+        <Route path={path} exact component={Home} />
+        <Route path="/teams/:canonical" component={Team} />
+      </Fragment>
     </SiteLayout>
   );
 };
