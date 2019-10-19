@@ -39,7 +39,7 @@ const Team = props => {
     <div>
       <Row gutter={24}>
         <Col xs={24} lg={14} xl={17}>
-          <ArticlesContainer articles={team.articles} loading={fetchingTeam} />
+          <ArticlesContainer articles={team.articles} loading={fetchingTeam} showTitle={false} />
         </Col>
 
         <Col xs={24} lg={10} xl={7}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, BackTop } from "antd";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import _isNil from "lodash/isNil";
@@ -68,7 +68,11 @@ let SiteLayout = props => {
       </Sider>
 
       <Layout>
-        <Content style={{ margin: "2.5em", overflow: "initial" }}>{props.children}</Content>
+        <Content style={{ margin: "2.5em", overflow: "initial" }}>
+          {props.children}
+
+          <BackTop />
+        </Content>
         <Footer style={{ textAlign: "center" }}>Sports Nucleus ©{new Date().getFullYear()}</Footer>
       </Layout>
     </Layout>
