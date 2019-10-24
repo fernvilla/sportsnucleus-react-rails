@@ -18,7 +18,7 @@ const leagueIconMap = new Map([
   ["NBA", FaBasketballBall],
   ["MLB", FaBaseballBall],
   ["WNBA", FaBasketballBall],
-  ["WNBA", FaBasketballBall],
+  ["NHL", FaHockeyPuck],
   ["MLS", FaFutbol],
   ["NFL", FaFootballBall],
   ["NCAA", FaFootballBall]
