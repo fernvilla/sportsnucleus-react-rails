@@ -45,7 +45,17 @@ let SiteLayout = props => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+      <Sider
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0
+        }}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+      >
         <div style={{ textAlign: "center" }}>
           <Link to="/">
             <img
@@ -93,7 +103,7 @@ let SiteLayout = props => {
         </Menu>
       </Sider>
 
-      <Layout>
+      <Layout style={{ marginLeft: 200 }}>
         <Content style={{ margin: "2.5em", overflow: "initial" }}>
           {props.children}
 
