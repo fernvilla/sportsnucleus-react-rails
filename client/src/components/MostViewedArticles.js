@@ -8,7 +8,7 @@ const { Content } = Layout;
 
 const MostViewedArticles = props => {
   return (
-    <Affix offset={24}>
+    <Affix offsetTop={24}>
       <Content
         style={{
           background: "#fff",

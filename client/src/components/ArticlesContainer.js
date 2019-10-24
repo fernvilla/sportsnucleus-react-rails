@@ -66,7 +66,9 @@ const ArticlesContainer = props => {
             <List.Item
               key={article.title}
               actions={null}
-              extra={null}
+              extra={
+                article.image && <img width={100} height="auto" alt="logo" src={article.image} />
+              }
               onClick={() => updateCount(article.id)}
             >
               <List.Item.Meta
