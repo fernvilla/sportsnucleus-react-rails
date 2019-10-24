@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, BackTop } from "antd";
+import { Layout, Menu, BackTop, Icon } from "antd";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import _isNil from "lodash/isNil";
+import {
+  FaBasketballBall,
+  FaBaseballBall,
+  FaHockeyPuck,
+  FaFutbol,
+  FaFootballBall
+} from "react-icons/fa";
+
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
+const leagueIconMap = new Map([
+  ["NBA", FaBasketballBall],
+  ["MLB", FaBaseballBall],
+  ["WNBA", FaBasketballBall],
+  ["WNBA", FaBasketballBall],
+  ["MLS", FaFutbol],
+  ["NFL", FaFootballBall],
+  ["NCAA", FaFootballBall]
+]);
 
 let SiteLayout = props => {
   const { leagues, location } = props;
@@ -50,9 +68,17 @@ let SiteLayout = props => {
           openKeys={openKeys}
           onOpenChange={props => setOpenKeys(props)}
         >
-          {leagues.map((league, i) => {
+          {leagues.map(league => {
             return (
-              <SubMenu key={league.abbreviation} title={<span>{league.abbreviation}</span>}>
+              <SubMenu
+                key={league.abbreviation}
+                title={
+                  <span>
+                    <Icon component={leagueIconMap.get(league.abbreviation)} />
+                    <span>{league.abbreviation}</span>
+                  </span>
+                }
+              >
                 {league.teams &&
                   league.teams.map(team => {
                     return (
