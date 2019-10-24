@@ -103,7 +103,7 @@ let SiteLayout = props => {
         </Menu>
       </Sider>
 
-      <Layout style={{ marginLeft: 200 }}>
+      <Layout style={{ marginLeft: !collapsed ? 200 : 80 }}>
         <Content style={{ margin: "2.5em", overflow: "initial" }}>
           {props.children}
 
