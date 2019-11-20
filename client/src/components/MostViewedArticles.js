@@ -14,9 +14,7 @@ const MostViewedArticles = props => {
           background: "#fff",
           padding: "1em 2em",
           margin: 0,
-          boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)",
-          maxHeight: "50vh",
-          overflowY: "auto"
+          boxShadow: "0 1px 2px 0 rgba(34,36,38,.15)"
         }}
       >
         <Paragraph strong>Most Viewed Articles</Paragraph>
